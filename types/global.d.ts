@@ -80,6 +80,18 @@ declare global {
         type: string;
     };
 
+    type WatchlistEntry = {
+        symbol: string;
+        company: string;
+        addedAt?: Date;
+    };
+
+    type WatchlistStockCard = WatchlistEntry & {
+        price: number | null;
+        change: number | null;
+        changePercent: number | null;
+    };
+
     type StockWithWatchlistStatus = Stock & {
         isInWatchlist: boolean;
     };
@@ -106,6 +118,7 @@ declare global {
         symbol: string;
         company: string;
         isInWatchlist: boolean;
+        userEmail: string;
         showTrashIcon?: boolean;
         type?: 'button' | 'icon';
         onWatchlistChange?: (symbol: string, isAdded: boolean) => void;
