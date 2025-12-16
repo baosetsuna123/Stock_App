@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📈 Signalist – Market Watch & Alerts
 
-## Getting Started
+Next.js app-router project for tracking stocks, personalized watchlists, AI‑assisted emails, and auth with Better Auth + MongoDB.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🧭 Overview
+- 🔐 Auth: email/password via Better Auth (MongoDB adapter, server cookies)
+- 📊 Market data: Finnhub search/news, TradingView embeds
+- ⭐ Watchlist: add/remove stocks, price/change cards, daily news email
+- ✉️ Email: Nodemailer for welcome + news summaries
+
+### High-level flow (text diagram)
+```
+[Client UI] --(actions)--> [Next server routes + Better Auth]
+       \                  -> MongoDB (users, watchlist)
+        \                 -> Finnhub API (quotes/news)
+         \                -> Nodemailer (welcome/news emails)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Quick start
+```bash
+npm install
+npm run dev
+# visit http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Required environment (.env.local / Vercel)
+```
+MONGODB_URI=...
+BETTER_AUTH_SECRET=...
+BETTER_AUTH_URL=http://localhost:3000            # Vercel: https://your-app.vercel.app
+FINNHUB_API_KEY=...                              # or NEXT_PUBLIC_FINNHUB_API_KEY
+NODEMAILER_EMAIL=...
+NODEMAILER_PASSWORD=...
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project structure (top-level)
+```
+market_app/
+├─ app/                 # Next.js app router (auth, watchlist, stocks)
+├─ components/          # UI + domain components (Header, WatchlistGrid, etc.)
+├─ database/            # Mongoose connection + models
+├─ lib/                 # actions (server), utils, auth, prompts
+├─ public/              # static assets (icons, images)
+├─ types/               # global TS types
+├─ scripts/             # helper scripts
+└─ middleware.ts        # auth/session middleware
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧩 Key pieces
+- `lib/better-auth/auth.ts` — Better Auth setup (MongoDB adapter, cookies)
+- `lib/actions/watchlist.actions.ts` — add/remove/list/quote watchlist items
+- `app/(root)/watchlist/page.tsx` — watchlist cards with price/change + removal
+- `components/WatchlistButton.tsx` — client toggle wired to server actions + toasts
+- `lib/actions/auth.actions.ts` — sign-in/up/out wrappers for pages
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 Scripts
+- `npm run dev` – start dev server
+- `npm run build` – production build
+- `npm run start` – start production server
+- `npm run lint` – lint
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Deployment notes
+- Set env vars in Vercel: `MONGODB_URI`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `FINNHUB_API_KEY`, `NODEMAILER_*`.
+- Ensure MongoDB driver version aligns with Better Auth (`mongodb@^6.18.x`).
+- If using a custom domain for emails, configure SMTP accordingly; otherwise Gmail via `NODEMAILER_EMAIL/PASSWORD`.
+
+---
+
+## 🔍 Status & diagnostics
+- Check server logs for Better Auth errors (e.g., BSON version, invalid ids).
+- Browser toasts show API error messages returned from server actions.
+- Atlas: clear legacy `user` docs if they were created with incompatible ids.
