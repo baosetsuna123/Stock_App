@@ -1,15 +1,18 @@
-# 📈 Signalist – Market Watch & Alerts
 <div align="center">
-  <h3>Market-grade watchlists, alerts, AI emails</h3>
-  <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:8px;">
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Next.js (App Router)</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">TypeScript</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Better Auth + MongoDB</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Mongoose</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Finnhub API</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Nodemailer</span>
-    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Tailwind (utility classes)</span>
-  </div>
+
+# 📈 Signalist – Market Watch & Alerts
+
+**Market-grade watchlists, alerts, AI emails**
+
+[![Next.js](https://img.shields.io/badge/Next.js-App_Router-000000?logo=next.js&logoColor=white)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)]()
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Utility--First-38B2AC?logo=tailwind-css&logoColor=white)]()
+[![Better Auth](https://img.shields.io/badge/Better_Auth-Server_Cookies-0f172a)]()
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)]()
+[![Mongoose](https://img.shields.io/badge/Mongoose-ODM-880000?logo=mongoose&logoColor=white)]()
+[![Finnhub](https://img.shields.io/badge/Finnhub-Market_Data-0ea5e9)]()
+[![Nodemailer](https://img.shields.io/badge/Nodemailer-Email_Service-22c55e)]()
+
 </div>
 
 Next.js app-router project for tracking stocks, personalized watchlists, AI‑assisted emails, and auth with Better Auth + MongoDB.
@@ -22,7 +25,7 @@ Next.js app-router project for tracking stocks, personalized watchlists, AI‑as
 - ⭐ Watchlist: add/remove stocks, price/change cards, daily news email
 - ✉️ Email: Nodemailer for welcome + news summaries
 
-### High-level flow (full text diagram)
+### 🗄️ High-level flow (full text diagram)
 ```
 [Browser UI]
   |-- Sign in / up -> [Better Auth (server, cookies)]
@@ -48,7 +51,7 @@ npm run dev
 # visit http://localhost:3000
 ```
 
-### Required environment (.env.local / Vercel)
+### ⚙️ Required environment (.env.local / Vercel)
 ```
 MONGODB_URI=...
 BETTER_AUTH_SECRET=...
