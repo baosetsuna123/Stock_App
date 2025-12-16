@@ -1,4 +1,16 @@
 # 📈 Signalist – Market Watch & Alerts
+<div align="center">
+  <h3>Market-grade watchlists, alerts, AI emails</h3>
+  <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:8px;">
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Next.js (App Router)</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">TypeScript</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Better Auth + MongoDB</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Mongoose</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Finnhub API</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Nodemailer</span>
+    <span style="padding:6px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#0f172a;color:#e2e8f0;">Tailwind (utility classes)</span>
+  </div>
+</div>
 
 Next.js app-router project for tracking stocks, personalized watchlists, AI‑assisted emails, and auth with Better Auth + MongoDB.
 
@@ -10,12 +22,21 @@ Next.js app-router project for tracking stocks, personalized watchlists, AI‑as
 - ⭐ Watchlist: add/remove stocks, price/change cards, daily news email
 - ✉️ Email: Nodemailer for welcome + news summaries
 
-### High-level flow (text diagram)
+### High-level flow (full text diagram)
 ```
-[Client UI] --(actions)--> [Next server routes + Better Auth]
-       \                  -> MongoDB (users, watchlist)
-        \                 -> Finnhub API (quotes/news)
-         \                -> Nodemailer (welcome/news emails)
+[Browser UI]
+  |-- Sign in / up -> [Better Auth (server, cookies)]
+  |                    |-- MongoDB (users, sessions)
+  |
+  |-- Watchlist toggle -> [Server actions] -> MongoDB (watchlist)
+  |
+  |-- Watchlist page -> [Server actions]
+  |                    |-- MongoDB (watchlist)
+  |                    |-- Finnhub API (quotes)
+  |
+  |-- News emails -> [Inngest job] -> Finnhub (news) -> Nodemailer -> User inbox
+  |
+  |-- Stock detail -> TradingView embeds (client) + server actions (watchlist state)
 ```
 
 ---
